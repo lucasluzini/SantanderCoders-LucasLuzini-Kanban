@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../app-constants';
 
@@ -24,8 +25,18 @@ export class LoginServiceService {
 
     return this.http.post(AppConstants.baseLogin, JSON.stringify(usuario), {headers: headers}).subscribe(data => {
       // Retorno Http
-      console.info(JSON.parse(JSON.stringify(data)));
-    })
+      //console.info(JSON.parse(JSON.stringify(data)));
+      const token = JSON.parse(JSON.stringify(data));
+      //console.info(JSON.parse(JSON.stringify(data)));
+      //console.log(token);
+      localStorage.setItem("token", token);
+
+      console.info("Token: " + localStorage.getItem("token"));
+    },
+      error => {
+        console.error("Erro ao tentar a autenticação");
+      }
+    )
 
   }
 
