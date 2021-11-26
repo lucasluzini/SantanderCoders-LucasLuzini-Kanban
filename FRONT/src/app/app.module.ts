@@ -7,6 +7,9 @@ import { DragndropComponent } from './dragndrop/dragndrop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TestComponent } from './test/test.component';
 
+import { HttpClientModule } from '@angular/common/http'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +19,8 @@ import { TestComponent } from './test/test.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

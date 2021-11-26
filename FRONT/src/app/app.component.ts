@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginServiceService } from './service/login-service.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SantanderCoders-LucasLuzini-Kanban';
+
+  usuario = {login: 'letscode', senha: 'lets@123'};
+
+  constructor(private loginService: LoginServiceService){}
+
+  public login() {
+    this.loginService.login(this.usuario);
+  }
+
+  ngOnInit() {
+    this.login();
+  }
+
 }
