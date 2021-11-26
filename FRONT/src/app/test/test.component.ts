@@ -20,6 +20,14 @@ export class TestComponent implements OnInit {
     'Fall asleep'
   ];
 
+  doing = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e'
+  ];
+
   done = [
     'Get up',
     'Brush teeth',
@@ -27,6 +35,7 @@ export class TestComponent implements OnInit {
     'Check e-mail',
     'Walk dog'
   ];
+
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

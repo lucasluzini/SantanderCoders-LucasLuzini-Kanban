@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { DragndropComponent } from './dragndrop/dragndrop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { TestComponent } from './dragndrop/test/test.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
