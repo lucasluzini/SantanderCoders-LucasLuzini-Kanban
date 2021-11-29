@@ -31,7 +31,7 @@ export class LoginServiceService {
       //console.log(token);
       localStorage.setItem("token", token);
 
-      console.info("Token: " + localStorage.getItem("token"));
+      console.log("Token: " + localStorage.getItem("token"));
     },
       error => {
         console.error("Erro ao tentar a autenticação");
