@@ -9,6 +9,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
     { path: 'cards', component: DragndropComponent, canActivate: [AuthGuardService] },
+    // { path: 'cards', component: DragndropComponent},
     { path: '**', redirectTo: '' },
 ]
 

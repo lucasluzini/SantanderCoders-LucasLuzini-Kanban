@@ -4,8 +4,8 @@ import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../app-constants';
 import { LoginServiceService } from '../service/login-service.service';
+import { Router } from '@angular/router';
 // import { RequestLogin } from '../models/RequestLogin';
-
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   // public requestLogin!: RequestLogin;
 
-  constructor(private loginService: LoginServiceService){}
+  constructor(private loginService: LoginServiceService, private router: Router){}
 
   ngOnInit(): void {
     // this.requestLogin = new RequestLogin();
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   public login() {
     console.log("Teste login -- usuario: " + this. requestLogin.login + " senha: " + this. requestLogin.senha);
     this.loginService.login(this. requestLogin);
+    this.router.navigate(['cards']);
   }
 
   public clear(): void {
