@@ -8,7 +8,8 @@ import { TestComponent } from './test/test.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component'
+
 
 
 @NgModule({

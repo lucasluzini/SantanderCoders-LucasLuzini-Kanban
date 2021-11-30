@@ -10,7 +10,7 @@ export class LoginServiceService {
 
   constructor(private http: HttpClient) {}
 
-  login(usuario: any){
+  login(requestLogin: any){
     //console.info(JSON.stringify(usuario))
 
     let headers: HttpHeaders = new HttpHeaders();
@@ -23,7 +23,7 @@ export class LoginServiceService {
 
     //console.log({headers: headers});
 
-    return this.http.post(AppConstants.baseLogin, JSON.stringify(usuario), {headers: headers}).subscribe(data => {
+    return this.http.post(AppConstants.baseLogin, JSON.stringify(requestLogin), {headers: headers}).subscribe(data => {
       // Retorno Http
       //console.info(JSON.parse(JSON.stringify(data)));
       const token = JSON.parse(JSON.stringify(data));
@@ -31,12 +31,11 @@ export class LoginServiceService {
       //console.log(token);
       localStorage.setItem("token", token);
 
-      console.log("Token: " + localStorage.getItem("token"));
+      console.info("Token: " + localStorage.getItem("token"));
     },
       error => {
-        console.error("Erro ao tentar a autenticação");
-      }
-    )
+        console.error("Erro ao tentar a autenticação" + error);
+      });
 
   }
 
