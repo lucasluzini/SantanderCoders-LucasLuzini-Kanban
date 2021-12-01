@@ -1,3 +1,5 @@
+// by Lucas Luzini
+
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
@@ -11,6 +13,7 @@ export class DragndropComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
