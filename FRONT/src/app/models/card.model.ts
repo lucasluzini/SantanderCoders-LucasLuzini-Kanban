@@ -1,9 +1,9 @@
 export class Card {
   constructor(
     public id: string,
-    public name: string,
-    public body: string,
-    public list: string
+    public titulo: string,
+    public conteudo: string,
+    public lista: string
   ) 
   {}
 }

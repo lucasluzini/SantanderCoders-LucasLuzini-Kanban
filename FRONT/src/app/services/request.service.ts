@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../app-constants';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
 
 @Injectable({
@@ -55,4 +55,6 @@ export class RequestService {
     const response = this.httpRequest.get<Card[]>(AppConstants.baseCards, { headers: this.headers });
     return response;
   }
+
+  cardsChanged = new Subject();
 }

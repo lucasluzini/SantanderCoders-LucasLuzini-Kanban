@@ -7,7 +7,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { LzniComponent } from './lzni/lzni.component'
 
 
 
@@ -15,7 +16,8 @@ import { LoginComponent } from './login/login.component'
   declarations: [
     AppComponent,
     DragndropComponent,
-    LoginComponent
+    LoginComponent,
+    LzniComponent
   ],
   imports: [
     BrowserModule,

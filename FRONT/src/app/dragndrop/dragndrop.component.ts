@@ -2,6 +2,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { RequestService } from '../services/request.service';
+import { Card } from '../models/card.model';
 
 @Component({
   selector: 'app-dragndrop',
@@ -10,11 +12,11 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class DragndropComponent implements OnInit {
 
-  constructor() { }
+  constructor(private reqService: RequestService) { }
 
-  ngOnInit(): void {
-    
-  }
+  // ngOnInit(): void {
+
+  // }
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
@@ -34,5 +36,29 @@ export class DragndropComponent implements OnInit {
       );
     }
   }
+
+
+  //new
+
+  cards!: Card[];
+
+  ngOnInit(): void {
+    this.getAllCardsFromAPI();
+
+    this.reqService.cardsChanged.subscribe((card) => {
+      this.getAllCardsFromAPI();
+    });
+ }
+
+ getAllCardsFromAPI() {
+   this.reqService.getCards().subscribe((cards) => {
+     if (!cards) {
+       return;
+     } else {
+       this.cards = cards;
+       console.log(cards);
+     }
+   });
+ }
 
 }
