@@ -1,10 +1,9 @@
 // by Lucas Luzini
 
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { RequestService } from '../services/request.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from '../models/card.model';
-import { CrudService } from '../services/crud.service';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-dragndrop',
@@ -13,20 +12,33 @@ import { CrudService } from '../services/crud.service';
 })
 export class DragndropComponent implements OnInit {
 
-  constructor(private varRequestService: RequestService, private varCrudService: CrudService) { }
-
-  ngOnInit(): void {
-    // this.varCrudService.createCard("Titulo1", "Conteudo1", "todo");
-    // this.varCrudService.createCard("Titulo2", "Conteudo2", "doing");
-    // this.varCrudService.createCard("Titulo3", "Conteudo3", "done");
-    this.varCrudService.readCards();
- }
+  constructor(private varRequestService: RequestService) { }
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
   doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
-
   done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
+  
+  //CRUD
+
+  createCard(titulo: string, conteudo: string, lista: string) {
+    // console.log(titulo, conteudo, lista);
+    this.varRequestService.insertCard(titulo, conteudo, lista).subscribe();
+  }
+
+  cardsArray!: Card[];
+  readCards() {
+    this.varRequestService.getCards().subscribe((data) => {
+      if (!data) {
+        console.log("readCards() não funcionou");
+        return;
+      } else {
+        // console.log(data);
+        this.cardsArray = data;
+        console.log(this.cardsArray);
+      }
+    });
+  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -39,5 +51,12 @@ export class DragndropComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  ngOnInit(): void {
+    // this.varCrudService.createCard("Titulo1", "Conteudo1", "todo");
+    // this.varCrudService.createCard("Titulo2", "Conteudo2", "doing");
+    // this.varCrudService.createCard("Titulo3", "Conteudo3", "done");
+    this.readCards();
   }
 }

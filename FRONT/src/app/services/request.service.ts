@@ -56,8 +56,4 @@ export class RequestService {
     return response;
   }
 
-  teste(){
-
-  }
-
 }

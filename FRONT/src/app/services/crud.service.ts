@@ -17,13 +17,13 @@ export class CrudService {
   }
 
   readCards() {
-    this.varRequestService.getCards().subscribe((cards) => {
-      if (!cards) {
+    this.varRequestService.getCards().subscribe((data) => {
+      if (!data) {
         console.log("readCards() não funcionou");
         return;
       } else {
-        this.cards = cards;
-        console.log(cards);
+        console.log(data);
+        return data;
       }
     });
   }
