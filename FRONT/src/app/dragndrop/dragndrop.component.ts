@@ -12,7 +12,7 @@ import { Card } from '../models/card.model';
 })
 export class DragndropComponent implements OnInit {
 
-  constructor(private reqService: RequestService) { }
+  constructor(private varRequestService: RequestService) { }
 
   // ngOnInit(): void {
 
@@ -44,15 +44,12 @@ export class DragndropComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCardsFromAPI();
-
-    this.reqService.cardsChanged.subscribe((card) => {
-      this.getAllCardsFromAPI();
-    });
  }
 
  getAllCardsFromAPI() {
-   this.reqService.getCards().subscribe((cards) => {
+   this.varRequestService.getCards().subscribe((cards) => {
      if (!cards) {
+       console.log("getAllCardsFromAPI não funcionou");
        return;
      } else {
        this.cards = cards;

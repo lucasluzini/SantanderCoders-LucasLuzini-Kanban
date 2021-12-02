@@ -17,7 +17,7 @@ import { RequestService } from '../services/request.service';
 })
 export class LoginComponent implements OnInit {
 
-  requestLogin = {login: 'letscode', senha: 'lets@123'};
+  bodyLoginEsenha = {login: 'letscode', senha: 'lets@123'};
   validLogin: boolean = false;
 
   constructor(private reqService: RequestService, private router: Router){}
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    this.reqService.loginRequestGetToken(this. requestLogin).subscribe((token) => {
+    this.reqService.loginRequestGetToken(this.bodyLoginEsenha).subscribe((token) => {
         if (token) {
           this.reqService.setToken(token);
           this.router.navigateByUrl('/cards');

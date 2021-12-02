@@ -22,11 +22,11 @@ export class RequestService {
     Authorization: this.authorization,
   };
 
-  isLogged = new Subject();
+  loginValid = new Subject();
 
-  constructor(private httpRequest: HttpClient) {}
+  constructor(private varHttpClient: HttpClient) {}
 
-  loginRequestGetToken(requestLogin: any){
+  loginRequestGetToken(bodyLoginEsenha: any){
     let headers: HttpHeaders = new HttpHeaders();
 
     headers = headers.append('Content-Type', 'application/json');
@@ -35,26 +35,24 @@ export class RequestService {
     headers = headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     headers = headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-    const response = this.httpRequest.post<string>(AppConstants.baseLogin, JSON.stringify(requestLogin), {headers: headers});
+    const response = this.varHttpClient.post<string>(AppConstants.baseLogin, JSON.stringify(bodyLoginEsenha), {headers: headers});
     return response;
   }
 
   setToken(token: string) {
     this.authorization = 'Bearer ' + token;
     localStorage.setItem('token', this.authorization);
-    this.isLogged.next(true);
+    this.loginValid.next(true);
   }
 
   clearToken() {
     this.authorization = '';
     localStorage.removeItem('token');
-    this.isLogged.next(true);
+    this.loginValid.next(true);
   }
 
   getCards() {
-    const response = this.httpRequest.get<Card[]>(AppConstants.baseCards, { headers: this.headers });
+    const response = this.varHttpClient.get<Card[]>(AppConstants.baseCards, { headers: this.headers });
     return response;
   }
-
-  cardsChanged = new Subject();
 }
