@@ -27,15 +27,7 @@ export class RequestService {
   constructor(private varHttpClient: HttpClient) {}
 
   loginRequestGetToken(bodyLoginEsenha: any){
-    let headers: HttpHeaders = new HttpHeaders();
-
-    headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Accept', 'application/json');
-    headers = headers.append('Access-Control-Allow-Origin', 'http://127.0.0.1:5000/');
-    headers = headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    headers = headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    const response = this.varHttpClient.post<string>(AppConstants.baseLogin, JSON.stringify(bodyLoginEsenha), {headers: headers});
+    const response = this.varHttpClient.post<string>(AppConstants.baseLogin, JSON.stringify(bodyLoginEsenha), {headers: this.headers});
     return response;
   }
 

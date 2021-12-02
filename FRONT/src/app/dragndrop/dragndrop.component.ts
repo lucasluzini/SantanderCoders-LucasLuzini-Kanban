@@ -43,13 +43,13 @@ export class DragndropComponent implements OnInit {
   cards!: Card[];
 
   ngOnInit(): void {
-    this.getAllCardsFromAPI();
+    this.showCards();
  }
 
- getAllCardsFromAPI() {
+ showCards() {
    this.varRequestService.getCards().subscribe((cards) => {
      if (!cards) {
-       console.log("getAllCardsFromAPI não funcionou");
+       console.log("showCards() não funcionou");
        return;
      } else {
        this.cards = cards;
@@ -57,5 +57,4 @@ export class DragndropComponent implements OnInit {
      }
    });
  }
-
 }
