@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { RequestService } from '../services/request.service';
 import { Card } from '../models/card.model';
+import { CrudService } from '../services/crud.service';
 
 @Component({
   selector: 'app-dragndrop',
@@ -12,11 +13,14 @@ import { Card } from '../models/card.model';
 })
 export class DragndropComponent implements OnInit {
 
-  constructor(private varRequestService: RequestService) { }
+  constructor(private varRequestService: RequestService, private varCrudService: CrudService) { }
 
-  // ngOnInit(): void {
-
-  // }
+  ngOnInit(): void {
+    // this.varCrudService.createCard("Titulo1", "Conteudo1", "todo");
+    // this.varCrudService.createCard("Titulo2", "Conteudo2", "doing");
+    // this.varCrudService.createCard("Titulo3", "Conteudo3", "done");
+    this.varCrudService.readCards();
+ }
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
@@ -36,25 +40,4 @@ export class DragndropComponent implements OnInit {
       );
     }
   }
-
-
-  //new
-
-  cards!: Card[];
-
-  ngOnInit(): void {
-    this.showCards();
- }
-
- showCards() {
-   this.varRequestService.getCards().subscribe((cards) => {
-     if (!cards) {
-       console.log("showCards() não funcionou");
-       return;
-     } else {
-       this.cards = cards;
-       console.log(cards);
-     }
-   });
- }
 }

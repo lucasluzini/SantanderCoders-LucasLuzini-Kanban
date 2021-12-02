@@ -47,4 +47,17 @@ export class RequestService {
     const response = this.varHttpClient.get<Card[]>(AppConstants.baseCards, { headers: this.headers });
     return response;
   }
+
+  insertCard(titulo: string, conteudo: string, lista: string){
+    const body = {titulo: titulo, conteudo: conteudo, lista: lista}
+    // console.log(body);
+    // console.log(JSON.stringify(body));
+    const response = this.varHttpClient.post<string>(AppConstants.baseCards, JSON.stringify(body), { headers: this.headers });
+    return response;
+  }
+
+  teste(){
+
+  }
+
 }

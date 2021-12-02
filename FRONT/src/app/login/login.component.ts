@@ -18,9 +18,10 @@ import { RequestService } from '../services/request.service';
 export class LoginComponent implements OnInit {
 
   bodyLoginEsenha = {login: 'letscode', senha: 'lets@123'};
+  // bodyLoginEsenha = {login: '', senha: ''};
   validLogin: boolean = false;
 
-  constructor(private reqService: RequestService, private router: Router){}
+  constructor(private varRequestService: RequestService, private router: Router){}
 
   ngOnInit(): void { 
 
@@ -31,14 +32,14 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    this.reqService.loginRequestGetToken(this.bodyLoginEsenha).subscribe((token) => {
+    this.varRequestService.loginRequestGetToken(this.bodyLoginEsenha).subscribe((token) => {
         if (token) {
-          this.reqService.setToken(token);
+          this.varRequestService.setToken(token);
           this.router.navigateByUrl('/cards');
           this.validLogin = false;
         } else {
           this.validLogin = true;
-          this.reqService.clearToken();
+          this.varRequestService.clearToken();
         }
       });
   }
