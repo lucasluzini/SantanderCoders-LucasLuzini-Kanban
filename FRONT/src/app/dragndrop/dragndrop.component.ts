@@ -32,11 +32,20 @@ export class DragndropComponent implements OnInit {
         console.log("readCards() não funcionou");
         return;
       } else {
-        // console.log(data);
         this.cardsArray = data;
         console.log(this.cardsArray);
+        this.collumnCreator();
       }
     });
+    
+  }
+
+
+  collumnCreator(){
+    var todoList = this.cardsArray.filter(function(e) {
+      return e.lista == 'todo';
+    });
+    console.log(todoList);
   }
 
 
@@ -54,9 +63,9 @@ export class DragndropComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.varCrudService.createCard("Titulo1", "Conteudo1", "todo");
-    // this.varCrudService.createCard("Titulo2", "Conteudo2", "doing");
-    // this.varCrudService.createCard("Titulo3", "Conteudo3", "done");
+    // this.createCard("Titulo1", "Conteudo1", "todo");
+    // this.createCard("Titulo2", "Conteudo2", "doing");
+    // this.createCard("Titulo3", "Conteudo3", "done");
     this.readCards();
   }
 }
