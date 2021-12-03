@@ -17,6 +17,10 @@ export class DragndropComponent implements OnInit {
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
   done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
+
+  todoArray!: Card[];
+  doingArray!: Card[];
+  doneArray!: Card[];
   
   //CRUD
 
@@ -46,6 +50,19 @@ export class DragndropComponent implements OnInit {
       return e.lista == 'todo';
     });
     console.log(todoList);
+    this.todoArray =  todoList;
+
+    var doingList = this.cardsArray.filter(function(e) {
+      return e.lista == 'doing';
+    });
+    console.log(doingList);
+    this.doingArray =  doingList;
+
+    var doneList = this.cardsArray.filter(function(e) {
+      return e.lista == 'done';
+    });
+    console.log(doneList);
+    this.doneArray =  doneList;
   }
 
 
