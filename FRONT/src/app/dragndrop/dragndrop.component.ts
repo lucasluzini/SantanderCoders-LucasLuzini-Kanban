@@ -1,9 +1,10 @@
 // by Lucas Luzini
 
-import { Component, OnInit } from '@angular/core';
+import { APP_BOOTSTRAP_LISTENER, Component, NgModule, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from '../models/card.model';
 import { RequestService } from '../services/request.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dragndrop',
@@ -12,7 +13,8 @@ import { RequestService } from '../services/request.service';
 })
 export class DragndropComponent implements OnInit {
 
-  constructor(private varRequestService: RequestService) { }
+  constructor(private varRequestService: RequestService, private modalService: NgbModal) {
+  }
 
   // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
@@ -42,6 +44,10 @@ export class DragndropComponent implements OnInit {
       }
     });
     
+  }
+
+  reload(){
+    document.location.reload();
   }
 
 
@@ -85,4 +91,28 @@ export class DragndropComponent implements OnInit {
     // this.createCard("Titulo3", "Conteudo3", "done");
     this.readCards();
   }
+
+
+  closeResult!: string;
+
+
+  //Modal
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason: any) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
 }

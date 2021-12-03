@@ -1,7 +1,41 @@
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Adicionar</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="titulo-texto" class="col-form-label">Título:</label>
+          <input type="text" class="form-control" id="titulo-texto">
+        </div>
+        <div class="form-group">
+          <label for="conteudo-texto" class="col-form-label">Conteúdo:</label>
+          <textarea class="form-control" id="conteudo-texto"></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button> -->
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')" >Cancelar</button>
+    <button type="button" class="btn btn-primary"(click)="modal.close('Save click')">Salvar</button>
+  </div>
+</ng-template>
+
+
+
+
 <div class="main">
+  <button type="button" class="btn btn-dark btn-sm btn-add" (click)="open(mymodal)">Adicionar</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h6>TO DO</h6>
+      
       <div
         cdkDropList id="todo"
         [cdkDropListData]="todoArray"
