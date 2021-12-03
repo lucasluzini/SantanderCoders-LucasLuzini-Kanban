@@ -14,7 +14,7 @@ export class DragndropComponent implements OnInit {
 
   constructor(private varRequestService: RequestService) { }
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
   done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
 
@@ -66,10 +66,9 @@ export class DragndropComponent implements OnInit {
   }
 
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(event.container.data);
     } else {
       transferArrayItem(
         event.previousContainer.data,

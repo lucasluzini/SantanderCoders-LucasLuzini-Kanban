@@ -12,63 +12,77 @@ import { RequestService } from '../services/request.service';
 })
 export class DragndropComponent implements OnInit {
 
-  connectedTo : string[] = [];
-  weeks = [
-    {
-      id:'week-1',
-      weeklist:[
-        "item 1",
-        "item 2",
-        "item 3",
-        "item 4",
-        "item 5"
-      ]
-    },{
-      id:'week-2',
-      weeklist:[
-        "item 1",
-        "item 2",
-        "item 3",
-        "item 4",
-        "item 5"
-      ]
-    },{
-      id:'week-3',
-      weeklist:[
-        "item 1",
-        "item 2",
-        "item 3",
-        "item 4",
-        "item 5"
-      ]
-    },{
-      id:'week-4',
-      weeklist:[
-        "item 1",
-        "item 2",
-        "item 3",
-        "item 4",
-        "item 5"
-      ]
-    },
-  ];
+  constructor(private varRequestService: RequestService) { }
 
-  constructor( ) {
-    for (let week of this.weeks) {
-      this.connectedTo.push(week.id);
-    };
-  };
+  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
+  done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
 
-  ngOnInit(){}
+  todoArray!: Card[];
+  doingArray!: Card[];
+  doneArray!: Card[];
+  
+  //CRUD
 
-  drop(event: CdkDragDrop<string[]>) {
+  createCard(titulo: string, conteudo: string, lista: string) {
+    // console.log(titulo, conteudo, lista);
+    this.varRequestService.insertCard(titulo, conteudo, lista).subscribe();
+  }
+
+  cardsArray!: Card[];
+  readCards() {
+    this.varRequestService.getCards().subscribe((data) => {
+      if (!data) {
+        console.log("readCards() não funcionou");
+        return;
+      } else {
+        this.cardsArray = data;
+        console.log(this.cardsArray);
+        this.collumnCreator();
+      }
+    });
+    
+  }
+
+
+  collumnCreator(){
+    var todoList = this.cardsArray.filter(function(e) {
+      return e.lista == 'todo';
+    });
+    console.log(todoList);
+    this.todoArray =  todoList;
+
+    var doingList = this.cardsArray.filter(function(e) {
+      return e.lista == 'doing';
+    });
+    console.log(doingList);
+    this.doingArray =  doingList;
+
+    var doneList = this.cardsArray.filter(function(e) {
+      return e.lista == 'done';
+    });
+    console.log(doneList);
+    this.doneArray =  doneList;
+  }
+
+
+  drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
     }
+  }
+
+  ngOnInit(): void {
+    // this.createCard("Titulo1", "Conteudo1", "todo");
+    // this.createCard("Titulo2", "Conteudo2", "doing");
+    // this.createCard("Titulo3", "Conteudo3", "done");
+    this.readCards();
   }
 }
