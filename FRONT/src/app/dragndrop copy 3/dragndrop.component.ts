@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Card } from '../models/card.model';
 import { RequestService } from '../services/request.service';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-dragndrop',
@@ -12,7 +13,15 @@ import { RequestService } from '../services/request.service';
 })
 export class DragndropComponent implements OnInit {
 
-  connectedTo : string[] = [];
+  // constructor(){}
+
+  ngOnInit(){}
+
+  weeks = [];
+  // connectedTo = [];
+  // connectedTo = [{weekID: ''}];
+  // teste!: string[];
+
   weeks = [
     {
       id:'week-1',
@@ -52,14 +61,13 @@ export class DragndropComponent implements OnInit {
       ]
     },
   ];
-
-  constructor( ) {
+  
+  constructor(){
     for (let week of this.weeks) {
-      this.connectedTo.push(week.id);
+      // this.connectedTo.push(week.id);
+      // this.connectedTo.push({ weekID: week.id });
     };
-  };
-
-  ngOnInit(){}
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
