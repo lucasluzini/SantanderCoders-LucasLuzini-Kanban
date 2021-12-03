@@ -53,7 +53,8 @@
 
 
     <div class="example-container">
-      <h6>TO DO</h6>
+      <!-- <h6>TO DO</h6> -->
+      <p class="title-box">TO DO</p>
       
       <div
         cdkDropList id="todo"
@@ -66,8 +67,8 @@
           {{item}}
         </div> -->
           <div class="example-box" *ngFor="let item of todoArray" cdkDrag>
-            <h5>{{item.titulo}}</h5>
-            {{item.conteudo}}
+            <p class="title-box">{{item.titulo}}</p>
+            <p class="content-box">{{item.conteudo}}</p>
             <!-- {{item.id}}<br/> -->
           </div>
       </div>
@@ -75,7 +76,7 @@
 
 
     <div class="example-container">
-      <h6>DOING</h6>
+      <p class="title-box">DOING</p>
       <div
         cdkDropList id="doing"
         [cdkDropListData]="doingArray"
@@ -87,8 +88,8 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doingArray" cdkDrag>
-          <h5>{{item.titulo}}</h5>
-          {{item.conteudo}}
+          <p class="title-box">{{item.titulo}}</p>
+          <p class="content-box">{{item.conteudo}}</p>
           <!-- {{item.id}}<br/> -->
         </div>
       </div>
@@ -96,7 +97,7 @@
 
 
     <div class="example-container">
-      <h6>DONE</h6>
+      <p class="title-box">DONE</p>
       <div
         cdkDropList id="done"
         [cdkDropListData]="doneArray"
@@ -108,8 +109,8 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doneArray" cdkDrag>
-          <h5>{{item.titulo}}</h5>
-          {{item.conteudo}}
+          <p class="title-box">{{item.titulo}}</p>
+          <p class="content-box">{{item.conteudo}}</p>
           <!-- {{item.id}}<br/> -->
         </div>
       </div>

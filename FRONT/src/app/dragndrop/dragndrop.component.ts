@@ -90,6 +90,7 @@ export class DragndropComponent implements OnInit {
     });
   }
 
+
   updateCard(id: string, titulo: string, conteudo: string, lista: string) {
     // console.log(titulo, conteudo, lista);
     this.varRequestService.alterCard(id, titulo, conteudo, lista).subscribe();
@@ -158,7 +159,7 @@ export class DragndropComponent implements OnInit {
 
       //Atualiza o container
       this.updateCard(event.container.data[event.currentIndex].id, event.container.data[event.currentIndex].titulo, event.container.data[event.currentIndex].conteudo, event.container.id);
-      this.readCards();
+      // this.readCards();
     }
   }
 
