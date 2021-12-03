@@ -2,6 +2,13 @@
   width: 100%;
   text-align:center;
 }
+
+.divCenter {
+  width: 100%;
+  text-align:center;
+  align-items: center;
+}
+
 .listCenter {
   padding: 0px;
   margin: 0 auto;
@@ -33,20 +40,22 @@
 }
 
 .example-box {
+  text-align: center;
+  align-items: center;
+
   background-color: #fafafa;
   /* opacity:0.1; */
-  text-align:center;
-  min-height: 100px;
+  /* min-height: 100px; */
   margin: 10px;
   /* margin-top: 10px;
   margin-bottom: 10px; */
   padding: 10px 10px;
   /* border: solid 1px #ccc; */
   color: rgba(0, 0, 0, 0.87);
-  display: flex;
+  display: center;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+
+  justify-content: space-between; 
   box-sizing: border-box;
   cursor: move;
   font-size: 14px;

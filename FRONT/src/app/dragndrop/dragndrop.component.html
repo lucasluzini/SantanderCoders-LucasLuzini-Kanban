@@ -48,7 +48,7 @@
 <div class="main">
   <button type="button" class="btn btn-dark btn-sm btn-add" (click)="open(mymodal)">Adicionar</button>
 
-  
+
   <div cdkDropListGroup>
 
 
@@ -65,11 +65,11 @@
           {{item}}
           {{item}}
         </div> -->
-        <div class="example-box" *ngFor="let item of todoArray" cdkDrag>
-          {{item.titulo}}<br/>
-          {{item.conteudo}}<br/>
-          <!-- {{item.id}}<br/> -->
-        </div>
+          <div class="example-box" *ngFor="let item of todoArray" cdkDrag>
+            <h5>{{item.titulo}}</h5>
+            {{item.conteudo}}
+            <!-- {{item.id}}<br/> -->
+          </div>
       </div>
     </div>
 
@@ -87,8 +87,8 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doingArray" cdkDrag>
-          {{item.titulo}}<br/>
-          {{item.conteudo}}<br/>
+          <h5>{{item.titulo}}</h5>
+          {{item.conteudo}}
           <!-- {{item.id}}<br/> -->
         </div>
       </div>
@@ -108,8 +108,8 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doneArray" cdkDrag>
-          {{item.titulo}}<br/>
-          {{item.conteudo}}<br/>
+          <h5>{{item.titulo}}</h5>
+          {{item.conteudo}}
           <!-- {{item.id}}<br/> -->
         </div>
       </div>
