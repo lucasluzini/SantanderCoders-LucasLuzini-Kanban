@@ -8,9 +8,9 @@ import { AuthGuardService } from "./services/auth-guard.service";
 const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
-    { path: 'cards', component: DragndropComponent, canActivate: [AuthGuardService] },
+    { path: 'kanban-board', component: DragndropComponent, canActivate: [AuthGuardService] },
     // { path: 'cards', component: DragndropComponent},
-    { path: '**', redirectTo: '' },
+    { path: '**', redirectTo: 'kanban-board' },
 ]
 
 @NgModule({

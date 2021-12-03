@@ -56,4 +56,12 @@ export class RequestService {
     return response;
   }
 
+  alterCard(id: string, titulo: string, conteudo: string, lista: string){
+    const body = {id: id, titulo: titulo, conteudo: conteudo, lista: lista}
+    // console.log(body);
+    // console.log(JSON.stringify(body));
+    const response = this.varHttpClient.put<string>(AppConstants.baseCards+id, JSON.stringify(body), { headers: this.headers });
+    return response;
+  }
+
 }

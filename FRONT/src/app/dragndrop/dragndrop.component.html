@@ -1,3 +1,4 @@
+
 <ng-template #mymodal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Adicionar</h4>
@@ -7,32 +8,50 @@
   </div>
   <div class="modal-body">
     <div class="modal-body">
-      <form>
+      <form #formName="ngForm">
         <div class="form-group">
-          <label for="titulo-texto" class="col-form-label">Título:</label>
-          <input type="text" class="form-control" id="titulo-texto">
+          <label for="titulo-input" class="col-form-label">Título:</label>
+          <input type="text" class="form-control" [(ngModel)]="bodyCreateCard.titulo" id="titulo-input" name="titulo-input" required>
         </div>
         <div class="form-group">
-          <label for="conteudo-texto" class="col-form-label">Conteúdo:</label>
-          <textarea class="form-control" id="conteudo-texto"></textarea>
+          <label for="conteudo-input" class="col-form-label">Conteúdo:</label>
+          <textarea class="form-control" id="conteudo-texto" [(ngModel)]="bodyCreateCard.conteudo" id="conteudo-input" name="conteudo-input" required></textarea>
         </div>
+        <br/>
+        <!-- <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="todo-input" value="todo" [(ngModel)]="bodyCreateCard.lista" required>
+          <label class="form-check-label" for="inlineTodo">Todo</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="doing-input" value="doing" [(ngModel)]="bodyCreateCard.lista" required>
+          <label class="form-check-label" for="inlineDoing">Doing</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="done-input" value="done" [(ngModel)]="bodyCreateCard.lista" required>
+          <label class="form-check-label" for="inlineDone">Done</label>
+        </div> -->
       </form>
+      <!-- <br/><label *ngIf="validCreation">Erro</label><br/> -->
     </div>
   </div>
 
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button> -->
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')" >Cancelar</button>
-    <button type="button" class="btn btn-primary"(click)="modal.close('Save click')">Salvar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Cancelar</button>
+    <!-- <button type="button" class="btn btn-primary"(click)="modal.close('Save click')">Salvar</button> -->
+    <button type="button" class="btn btn-primary"(click)="modal.close('Save click')" (click)="modalSave()" id="btnModalSave" [disabled]="!formName.valid">Salvar</button>
   </div>
 </ng-template>
 
 
 
-
 <div class="main">
   <button type="button" class="btn btn-dark btn-sm btn-add" (click)="open(mymodal)">Adicionar</button>
+
+  
   <div cdkDropListGroup>
+
+
     <div class="example-container">
       <h6>TO DO</h6>
       
@@ -47,12 +66,13 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of todoArray" cdkDrag>
-          {{item.titulo}}
-          {{item.conteudo}}
-          {{item.id}}
+          {{item.titulo}}<br/>
+          {{item.conteudo}}<br/>
+          <!-- {{item.id}}<br/> -->
         </div>
       </div>
     </div>
+
 
     <div class="example-container">
       <h6>DOING</h6>
@@ -67,12 +87,13 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doingArray" cdkDrag>
-          {{item.titulo}}
-          {{item.conteudo}}
-          {{item.id}}
+          {{item.titulo}}<br/>
+          {{item.conteudo}}<br/>
+          <!-- {{item.id}}<br/> -->
         </div>
       </div>
     </div>
+
 
     <div class="example-container">
       <h6>DONE</h6>
@@ -87,15 +108,11 @@
           {{item}}
         </div> -->
         <div class="example-box" *ngFor="let item of doneArray" cdkDrag>
-          {{item.titulo}}
-          {{item.conteudo}}
-          {{item.id}}
+          {{item.titulo}}<br/>
+          {{item.conteudo}}<br/>
+          <!-- {{item.id}}<br/> -->
         </div>
       </div>
     </div>
-
-
-
-
   </div>
 </div>

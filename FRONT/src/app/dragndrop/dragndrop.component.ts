@@ -5,6 +5,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/dra
 import { Card } from '../models/card.model';
 import { RequestService } from '../services/request.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {AfterViewInit,ElementRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-dragndrop',
@@ -16,75 +17,6 @@ export class DragndropComponent implements OnInit {
   constructor(private varRequestService: RequestService, private modalService: NgbModal) {
   }
 
-  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-  doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
-  done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
-
-  todoArray!: Card[];
-  doingArray!: Card[];
-  doneArray!: Card[];
-  
-  //CRUD
-
-  createCard(titulo: string, conteudo: string, lista: string) {
-    // console.log(titulo, conteudo, lista);
-    this.varRequestService.insertCard(titulo, conteudo, lista).subscribe();
-  }
-
-  cardsArray!: Card[];
-  readCards() {
-    this.varRequestService.getCards().subscribe((data) => {
-      if (!data) {
-        console.log("readCards() não funcionou");
-        return;
-      } else {
-        this.cardsArray = data;
-        console.log(this.cardsArray);
-        this.collumnCreator();
-      }
-    });
-    
-  }
-
-  reload(){
-    document.location.reload();
-  }
-
-
-  collumnCreator(){
-    var todoList = this.cardsArray.filter(function(e) {
-      return e.lista == 'todo';
-    });
-    console.log(todoList);
-    this.todoArray =  todoList;
-
-    var doingList = this.cardsArray.filter(function(e) {
-      return e.lista == 'doing';
-    });
-    console.log(doingList);
-    this.doingArray =  doingList;
-
-    var doneList = this.cardsArray.filter(function(e) {
-      return e.lista == 'done';
-    });
-    console.log(doneList);
-    this.doneArray =  doneList;
-  }
-
-
-  drop(event: CdkDragDrop<Card[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
-
   ngOnInit(): void {
     // this.createCard("Titulo1", "Conteudo1", "todo");
     // this.createCard("Titulo2", "Conteudo2", "doing");
@@ -92,11 +24,82 @@ export class DragndropComponent implements OnInit {
     this.readCards();
   }
 
+  reload(){
+    document.location.reload();
+  }
+  
 
-  closeResult!: string;
+  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  // doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
+  // done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
+
+  todoArray!: Card[];
+  doingArray!: Card[];
+  doneArray!: Card[];
+  
+  cardsArray!: Card[];
+
+  bodyCreateCard = {
+    titulo: '',
+    conteudo: '',
+    lista: 'todo'
+  };
+  validCreation=false;
+  creationsErrors='';
+
+
+  collumnCreator(){
+    var todoList = this.cardsArray.filter(function(e) {
+      return e.lista == 'todo';
+    });
+    // console.log(todoList);
+    this.todoArray =  todoList;
+
+    var doingList = this.cardsArray.filter(function(e) {
+      return e.lista == 'doing';
+    });
+    // console.log(doingList);
+    this.doingArray =  doingList;
+
+    var doneList = this.cardsArray.filter(function(e) {
+      return e.lista == 'done';
+    });
+    // console.log(doneList);
+    this.doneArray =  doneList;
+  }
+
+
+
+  //CRUD
+
+  createCard(titulo: string, conteudo: string, lista: string) {
+    // console.log(titulo, conteudo, lista);
+    this.varRequestService.insertCard(titulo, conteudo, lista).subscribe();
+  }
+
+  readCards() {
+    this.varRequestService.getCards().subscribe((data) => {
+      if (!data) {
+        console.log("readCards() não funcionou");
+        return;
+      } else {
+        this.cardsArray = data;
+        // console.log(this.cardsArray);
+        this.collumnCreator();
+      }
+    });
+  }
+
+  updateCard(id: string, titulo: string, conteudo: string, lista: string) {
+    // console.log(titulo, conteudo, lista);
+    this.varRequestService.alterCard(id, titulo, conteudo, lista).subscribe();
+  }
+
 
 
   //Modal
+
+  closeResult!: string;
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
       this.closeResult = `Closed with: ${result}`;
@@ -114,5 +117,53 @@ export class DragndropComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+
+  modalSave(){
+    if(this.bodyCreateCard.titulo=='' || this.bodyCreateCard.conteudo==''){
+      console.error("Dados vazios");
+      this.creationsErrors='Dados vazio!'
+      return;
+    }
+    else{
+        // console.log(this.bodyCreateCard);
+        this.createCard(this.bodyCreateCard.titulo, this.bodyCreateCard.conteudo, this.bodyCreateCard.lista);
+        this.readCards();
+        // console.log("Dados inseridos");
+        this.bodyCreateCard.titulo='';
+        this.bodyCreateCard.conteudo='';
+    }
+  }
+
+
+
+
+  drop(event: CdkDragDrop<Card[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+
+      // console.log(event.previousContainer.data);
+      // console.log(event.container.data);
+      // console.log(event.previousIndex);
+      // console.log(event.currentIndex);
+      // console.log(event.container.data[event.currentIndex].id, event.container.data[event.currentIndex].titulo)
+      // console.log(event.previousIndex);
+      // console.log(event.container.data[event.currentIndex].id, event.container.data[event.currentIndex].titulo, event.container.data[event.currentIndex].conteudo, event.container.id);
+
+      //Atualiza o container
+      this.updateCard(event.container.data[event.currentIndex].id, event.container.data[event.currentIndex].titulo, event.container.data[event.currentIndex].conteudo, event.container.id);
+      this.readCards();
+    }
+  }
+
+
+
+
 
 }

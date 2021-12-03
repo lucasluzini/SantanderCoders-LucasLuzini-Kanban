@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.varRequestService.loginRequestGetToken(this.bodyLoginEsenha).subscribe((token) => {
         if (token) {
           this.varRequestService.setToken(token);
-          this.router.navigateByUrl('/cards');
+          this.router.navigateByUrl('/kanban-board');
           this.validLogin = false;
         } else {
           this.validLogin = true;
