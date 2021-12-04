@@ -19,9 +19,6 @@ export class DragndropComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.createCard("Titulo1", "Conteudo1", "todo");
-    // this.createCard("Titulo2", "Conteudo2", "doing");
-    // this.createCard("Titulo3", "Conteudo3", "done");
     this.readCards();
   }
 
@@ -29,11 +26,6 @@ export class DragndropComponent implements OnInit {
     document.location.reload();
   }
   
-
-  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-  // doing = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk Dog'];
-  // done = ['Get', 'Brush', 'Take', 'Check', 'Walk'];
-
   todoArray!: Card[];
   doingArray!: Card[];
   doneArray!: Card[];
@@ -104,7 +96,7 @@ export class DragndropComponent implements OnInit {
   }
 
   setEditValues(item: any){
-    console.log(item);
+    // console.log(item);
     this.bodyEditCard.id=item.id;
     this.bodyEditCard.titulo=item.titulo;
     this.bodyEditCard.conteudo=item.conteudo;
