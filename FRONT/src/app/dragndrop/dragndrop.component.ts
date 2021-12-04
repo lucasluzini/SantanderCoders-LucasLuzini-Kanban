@@ -6,6 +6,7 @@ import { Card } from '../models/card.model';
 import { RequestService } from '../services/request.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {AfterViewInit,ElementRef, ViewChild} from '@angular/core';
+import {MatIconModule} from '@angular/material/icon'
 
 @Component({
   selector: 'app-dragndrop',
@@ -43,6 +44,12 @@ export class DragndropComponent implements OnInit {
     titulo: '',
     conteudo: '',
     lista: 'todo'
+  };
+  bodyEditCard = {
+    id: '',
+    titulo: '',
+    conteudo: '',
+    lista: ''
   };
   validCreation=false;
   creationsErrors='';
@@ -96,12 +103,29 @@ export class DragndropComponent implements OnInit {
     this.varRequestService.alterCard(id, titulo, conteudo, lista).subscribe();
   }
 
+  setEditValues(item: any){
+    console.log(item);
+    this.bodyEditCard.id=item.id;
+    this.bodyEditCard.titulo=item.titulo;
+    this.bodyEditCard.conteudo=item.conteudo;
+    this.bodyEditCard.lista=item.lista;
+  }
+
 
 
   //Modal
 
   closeResult!: string;
   open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason: any) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openModalEditor(content: any, item: any) {
+    this.setEditValues(item);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason: any) => {

@@ -44,9 +44,36 @@
 </ng-template>
 
 
+<ng-template #mymodalEditor let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar</h4>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <form #formNameEditor="ngForm">
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Título:</label>
+          <input type="text" class="form-control" [(ngModel)]="bodyEditCard.titulo" id="titulo-input" name="titulo-input" required>
+        </div>
+        <div class="form-group">
+          <label for="conteudo-input" class="col-form-label">Conteúdo:</label>
+          <textarea class="form-control" id="conteudo-texto" [(ngModel)]="bodyEditCard.conteudo" id="conteudo-input" name="conteudo-input" required></textarea>
+        </div>
+        <br/>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Cancelar</button>
+    <button type="button" class="btn btn-primary"(click)="modal.close('Save click')" (click)="updateCard(bodyEditCard.id, bodyEditCard.titulo, bodyEditCard.conteudo, bodyEditCard.lista)" (click)="readCards()" id="btnModalSave" [disabled]="!formNameEditor.valid">Salvar</button>
+  </div>
+</ng-template>
+
+
 
 <div class="main">
-  <button type="button" class="btn btn-dark btn-sm btn-add" (click)="open(mymodal)">Adicionar</button>
+  <button type="button" class="btn btn-dark btn-sm btn-margin20px" (click)="open(mymodal)">Adicionar</button>
 
 
   <div cdkDropListGroup>
@@ -70,6 +97,8 @@
             <p class="title-box">{{item.titulo}}</p>
             <p class="content-box">{{item.conteudo}}</p>
             <!-- {{item.id}}<br/> -->
+            <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
+            <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
           </div>
       </div>
     </div>
@@ -91,6 +120,8 @@
           <p class="title-box">{{item.titulo}}</p>
           <p class="content-box">{{item.conteudo}}</p>
           <!-- {{item.id}}<br/> -->
+          <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
+          <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
         </div>
       </div>
     </div>
@@ -112,6 +143,8 @@
           <p class="title-box">{{item.titulo}}</p>
           <p class="content-box">{{item.conteudo}}</p>
           <!-- {{item.id}}<br/> -->
+          <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
+          <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
         </div>
       </div>
     </div>
