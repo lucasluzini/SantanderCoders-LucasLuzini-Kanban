@@ -2,9 +2,6 @@
 <ng-template #mymodal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Adicionar</h4>
-    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button> -->
   </div>
   <div class="modal-body">
     <div class="modal-body">
@@ -18,7 +15,7 @@
           <textarea class="form-control" id="conteudo-texto" [(ngModel)]="bodyCreateCard.conteudo" id="conteudo-input" name="conteudo-input" required></textarea>
         </div>
         <br/>
-        <!-- <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="todo-input" value="todo" [(ngModel)]="bodyCreateCard.lista" required>
           <label class="form-check-label" for="inlineTodo">Todo</label>
         </div>
@@ -29,16 +26,13 @@
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="done-input" value="done" [(ngModel)]="bodyCreateCard.lista" required>
           <label class="form-check-label" for="inlineDone">Done</label>
-        </div> -->
+        </div>
       </form>
-      <!-- <br/><label *ngIf="validCreation">Erro</label><br/> -->
     </div>
   </div>
 
   <div class="modal-footer">
-    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button> -->
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss('Cross click')">Cancelar</button>
-    <!-- <button type="button" class="btn btn-primary"(click)="modal.close('Save click')">Salvar</button> -->
     <button type="button" class="btn btn-primary"(click)="modal.close('Save click')" (click)="modalSave()" id="btnModalSave" [disabled]="!formName.valid">Salvar</button>
   </div>
 </ng-template>
@@ -73,32 +67,23 @@
 
 
 <div class="main">
-  <button type="button" class="btn btn-dark btn-sm btn-margin20px" (click)="open(mymodal)">Adicionar</button>
 
+  <button type="button" class="btn btn-dark btn-sm btn-margin20px" (click)="open(mymodal)">Adicionar</button>
 
   <div cdkDropListGroup>
 
-
     <div class="example-container">
-      <!-- <h6>TO DO</h6> -->
       <p class="title-box">TO DO</p>
-      
       <div
         cdkDropList id="todo"
         [cdkDropListData]="todoArray"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>
-          {{item}}
-          {{item}}
-          {{item}}
-        </div> -->
           <div class="example-box" *ngFor="let item of todoArray" cdkDrag>
             <p class="title-box">{{item.titulo}}</p>
             <p class="content-box">{{item.conteudo}}</p>
-            <!-- {{item.id}}<br/> -->
             <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
-            <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
+            <button class="btn-marginLeftRight btn-no-style" (click)="deleteCard(item)" (click)="readCards()"><mat-icon>delete_forever</mat-icon></button>
           </div>
       </div>
     </div>
@@ -111,17 +96,11 @@
         [cdkDropListData]="doingArray"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>
-          {{item}}
-          {{item}}
-          {{item}}
-        </div> -->
         <div class="example-box" *ngFor="let item of doingArray" cdkDrag>
           <p class="title-box">{{item.titulo}}</p>
           <p class="content-box">{{item.conteudo}}</p>
-          <!-- {{item.id}}<br/> -->
           <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
-          <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
+          <button class="btn-marginLeftRight btn-no-style" (click)="deleteCard(item)" (click)="readCards()"><mat-icon>delete_forever</mat-icon></button>
         </div>
       </div>
     </div>
@@ -134,19 +113,15 @@
         [cdkDropListData]="doneArray"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>
-          {{item}}
-          {{item}}
-          {{item}}
-        </div> -->
         <div class="example-box" *ngFor="let item of doneArray" cdkDrag>
           <p class="title-box">{{item.titulo}}</p>
           <p class="content-box">{{item.conteudo}}</p>
-          <!-- {{item.id}}<br/> -->
           <button class="btn-marginLeftRight btn-no-style" (click)="openModalEditor(mymodalEditor, item)"><mat-icon>edit</mat-icon></button>
-          <button class="btn-marginLeftRight btn-no-style"><mat-icon>delete_forever</mat-icon></button>
+          <button class="btn-marginLeftRight btn-no-style" (click)="deleteCard(item)" (click)="readCards()"><mat-icon>delete_forever</mat-icon></button>
         </div>
       </div>
     </div>
+
+
   </div>
 </div>

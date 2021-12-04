@@ -111,6 +111,10 @@ export class DragndropComponent implements OnInit {
     this.bodyEditCard.lista=item.lista;
   }
 
+  deleteCard(item: any){
+    this.varRequestService.removeCard(item.id).subscribe();
+  }
+
 
 
   //Modal
