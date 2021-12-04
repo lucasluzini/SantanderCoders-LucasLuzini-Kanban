@@ -8,8 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { LzniComponent } from './lzni/lzni.component'
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { LzniComponent } from './lzni/lzni.component'
     AppComponent,
     DragndropComponent,
     LoginComponent,
-    LzniComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +23,8 @@ import { LzniComponent } from './lzni/lzni.component'
     BrowserAnimationsModule,
     DragDropModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],

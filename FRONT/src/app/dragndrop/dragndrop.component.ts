@@ -1,4 +1,4 @@
-// by Lucas Luzini - Santander Coders
+// by Lucas Luzini
 
 import { APP_BOOTSTRAP_LISTENER, Component, NgModule, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';

@@ -64,4 +64,12 @@ export class RequestService {
     return response;
   }
 
+  removeCard(id: string){
+    const body = {id: id}
+    // console.log(body);
+    // console.log(JSON.stringify(body));
+    const response = this.varHttpClient.delete<string>(AppConstants.baseCards+id, { headers: this.headers });
+    return response;
+  }
+
 }
