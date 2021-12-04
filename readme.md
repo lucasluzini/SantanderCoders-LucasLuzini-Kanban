@@ -11,3 +11,7 @@ Este app, se trata de um quadro de Kanban.
 <li>É possível editar e excluir tarefas.</li><br/>
 <li>Para ter acesso ao quadro, é necessário realizar o login.</li><br/>
 
+
+<h4>Bugs:</h4>
+
+<li>Dependendo do tempo de resposta do BackEnd, os cards ou suas alterações podem demorar a aparecerem, sendo necessário alguma manipulação dos elementos para acontecer um refresh.</li><br/>
